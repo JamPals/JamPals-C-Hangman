@@ -5,7 +5,8 @@ char * stage4 = " ____\n";
 char * stage3re = " |  |\n";
 char * stage2re = " |(*_*)\n";
 // The words that the game can pick from.char* words[] = {"Hello", "Tree", "House", "Computer"};
-// Print Stage Functionvoid printStage(int stage) {
+// Print Stage Function
+void printStage(int stage) {
     if(stage == 1) {
         printf("%s", stage1);
     }
