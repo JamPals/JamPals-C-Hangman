@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 // The stages of ASCII art used to draw the hangman to the screen.
 char * stage1 = "---\n"; 
@@ -19,41 +20,35 @@ char* words[] = {"Hello", "Tree", "House", "Computer"};
 // Print Stage Function
 void printStage(int stage) {
     if(stage == 1) {
-        printf("%s", stage1);
+        printf("\n%s\n", stage1);
     }
     if(stage == 2) {
-        printf("%s", stage2);
-        printf("%s", stage1);
+        printf("\n%s", stage2);
+        printf("%s\n", stage1);
     }
     if(stage == 3) {
-        printf("%s", stage3);
+        printf("\n%s", stage3);
         printf("%s", stage2);
-        printf("%s", stage1);
+        printf("%s\n", stage1);
     }
     if(stage == 4) {
-        printf("%s", stage4);
+        printf("\n%s", stage4);
         printf("%s", stage3);
         printf("%s", stage2);
-        printf("%s", stage1);  
+        printf("%s\n", stage1);  
     }
     if(stage == 5) {
-        printf("%s", stage4);
+        printf("\n%s", stage4);
         printf("%s", stage3re);
         printf("%s", stage2);
-        printf("%s", stage1);
+        printf("%s\n", stage1);
     }
     if(stage == 6) {
-        printf("%s", stage4);
+        printf("\n%s", stage4);
         printf("%s", stage3re);
         printf("%s", stage2re);
-        printf("%s", stage1);
+        printf("%s\n", stage1);
     }
-}
-char charInput(char inputText[]) {
-    char input;
-    printf("%s", inputText);
-    scanf("%c", &input);  
-    return input;
 }
 
 int main() {
@@ -63,9 +58,28 @@ int main() {
 
     // Word Gen     
     char * word = words[rand() % 4]; 
-    printf("%s\n", word); // TODO REMOVE    
+    
+    int stage = 0;
 
-    printf("%c \n", charInput("Enter your first letter: ")); // TODO REMOVE    
+    while (stage < 6) {
 
+        // TOFIX for some reason scanf detects some random character, causing the stage to go up.
+        char input;
+        printf("%s", "Enter a letter: \n");
+        scanf("%c", &input);  
+
+        if(strchr(word, input) != NULL)
+        {
+            printf("That letter was in the word!\n"); // TODO add to a table of found letters and display word preview
+
+        } else {
+            stage = stage + 1;
+            printf("That letter was not in the word.\n");
+        }
+
+        printStage(stage);
+    }
+
+    printf("Uh oh, you lost!");
     return 0;
 }
